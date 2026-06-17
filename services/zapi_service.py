@@ -6,6 +6,7 @@ load_dotenv()
 
 INSTANCE = os.getenv("ZAPI_INSTANCE")
 TOKEN = os.getenv("ZAPI_TOKEN")
+CLIENT_TOKEN = os.getenv("ZAPI_CLIENT_TOKEN")
 
 
 def enviar_mensagem(nome, telefone):
@@ -20,8 +21,12 @@ def enviar_mensagem(nome, telefone):
     payload = {
         "phone": telefone,
         "message": (
-            f"Olá, {nome}! Tudo bem com você?"
+            f"Olá, {nome} tudo bem com você?"
         )
+    }
+
+    headers = {
+        "Client-Token": CLIENT_TOKEN
     }
 
     try:
@@ -29,6 +34,7 @@ def enviar_mensagem(nome, telefone):
         resposta = requests.post(
             url,
             json=payload,
+            headers=headers,
             timeout=10
         )
 

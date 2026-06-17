@@ -1,4 +1,4 @@
-# b2bflow-challenge
+# B2bflow-challenge
 
 Aplicação em Python que lê contatos armazenados no Supabase e envia mensagens personalizadas via WhatsApp usando a Z-API.
 
@@ -61,15 +61,16 @@ SUPABASE_URL=
 SUPABASE_KEY=
 ZAPI_INSTANCE=
 ZAPI_TOKEN=
+ZAPI_CLIENT_TOKEN=
 ```
 
 - `SUPABASE_URL` e `SUPABASE_KEY` estão disponíveis em Settings > API no painel do Supabase.
-- `ZAPI_INSTANCE` e `ZAPI_TOKEN` estão disponíveis na página da instância no painel da Z-API.
+- `ZAPI_INSTANCE`, `ZAPI_TOKEN` e `ZAPI_CLIENT_TOKEN` estão disponíveis no painel da Z-API, na página da instância e em Segurança.
 
 ## Como instalar
 
 ```bash
-git clone https://github.com/seu-usuario/b2bflow-challenge.git
+git clone https://github.com/mclarabastos/b2bflow-challenge.git
 cd b2bflow-challenge
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
@@ -85,20 +86,21 @@ python main.py
 ## Exemplo de saída
 
 ```
-=== Iniciando envio ===
-3 contatos carregados
-Enviando → Maria
-Mensagem enviada com sucesso
-Enviando → João
-Mensagem enviada com sucesso
-Enviando → Ana
-Mensagem enviada com sucesso
-=== Processo concluído ===
+2026-06-17 13:33:12,122 | INFO | Iniciando envio
+2026-06-17 13:33:13,119 | INFO | 3 contatos carregados
+2026-06-17 13:33:13,119 | INFO | Enviando para Maria
+2026-06-17 13:33:13,211 | INFO | Mensagem enviada com sucesso
+2026-06-17 13:33:13,211 | INFO | Enviando para João
+2026-06-17 13:33:13,293 | INFO | Mensagem enviada com sucesso
+2026-06-17 13:33:13,293 | INFO | Enviando para Ana
+2026-06-17 13:33:13,377 | INFO | Mensagem enviada com sucesso
+2026-06-17 13:33:13,377 | INFO | Processo concluído
 ```
 
 ## Boas práticas aplicadas
 
 - Credenciais isoladas em `.env`, fora do controle de versão
 - Separação de responsabilidades entre serviços (`supabase_service`, `zapi_service`)
-- Logs simples para acompanhar o fluxo de execução
+- Logs com timestamp para acompanhar o fluxo de execução
+- Tratamento de erros com try/except em todas as chamadas externas
 - Leitura limitada a 3 registros conforme especificação do desafio

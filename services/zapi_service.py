@@ -21,7 +21,7 @@ def enviar_mensagem(nome, telefone):
     payload = {
         "phone": telefone,
         "message": (
-            f"Olá, {nome} tudo bem com você?"
+            f"Olá, {nome}! Tudo bem com você?"
         )
     }
 
